@@ -13,6 +13,7 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
+import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -53,6 +54,7 @@ public class GoogleAuthModule extends ReactContextBaseJavaModule {
     }
     
     // TODO: Ensure to make this method callable in Javascript!
+    @ReactMethod
     public void signIn(Promise promise) {
         mSignInPromise = promise;
 
@@ -75,6 +77,7 @@ public class GoogleAuthModule extends ReactContextBaseJavaModule {
     }
 
     // TODO: Ensure to make this method callable in Javascript!
+    @ReactMethod
     public void signOut(final Promise promise) {
         GoogleSignIn.getClient(mContext.getApplicationContext(), mSignInOptions)
                 .signOut()
@@ -102,7 +105,7 @@ public class GoogleAuthModule extends ReactContextBaseJavaModule {
     @NonNull
     @Override
     public String getName() {
-        return "GoogleAuth";
+        return "GoogleAuthModule";
     }
 
     private void handleSignInResult(Intent data) {

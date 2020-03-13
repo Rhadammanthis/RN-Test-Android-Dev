@@ -227,6 +227,8 @@ dependencies {
     // TODO: check that all required dependencies are added
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation 'com.google.android.gms:play-services-auth:17.0.0' //For Google Auth service
+    implementation 'com.google.firebase:firebase-crashlytics-ndk:17.0.0-beta01' //For Firebase Crashlytics
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";
