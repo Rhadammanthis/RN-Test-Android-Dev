@@ -47,15 +47,44 @@ const RNModal = props => {
 
   const Tab = createBottomTabNavigator();
 
-  return <Modal {...props} visible={props.isVisible} animationType="slide">
-    <SafeAreaView style={styles.modal}>
-      <Button title={"Dismiss RN component"} onPress={props.onDismiss} />
-      <Tab.Navigator>
-        <Tab.Screen name="List" component={ListScreen} />
-        <Tab.Screen name="Scroll" component={ScrollScreen} />
-        <Tab.Screen name="Graph" component={GraphScreen} />
+  return <Modal onRequestClose={props.onRequestClose} visible={props.isVisible} animationType="slide">
+    <View style={styles.modal}>
+      <View style= {{ margin: 10}}>
+        <Button title="Dismiss RN component" onPress={props.onDismiss}/>
+      </View>
+      <Tab.Navigator
+        tabBarOptions={{
+          inactiveTintColor: 'gray',
+        }}>
+        <Tab.Screen
+          name="List"
+          component={ListScreen}
+          options={{
+            tabBarLabel: 'List',
+            tabBarIcon: ({ color, size }) => (
+              <View style={{ width: size, height: size, backgroundColor: color }} />
+            ),
+          }} />
+        <Tab.Screen
+          name="Scroll"
+          component={ScrollScreen}
+          options={{
+            tabBarLabel: 'Scroll',
+            tabBarIcon: ({ color, size }) => (
+              <View style={{ width: size, height: size, backgroundColor: color }} />
+            ),
+          }} />
+        <Tab.Screen
+          name="Graph"
+          component={GraphScreen}
+          options={{
+            tabBarLabel: 'Graph',
+            tabBarIcon: ({ color, size }) => (
+              <View style={{ width: size, height: size, backgroundColor: color }} />
+            ),
+          }} />
       </Tab.Navigator>
-    </SafeAreaView>
+    </View>
   </Modal>
 }
 
