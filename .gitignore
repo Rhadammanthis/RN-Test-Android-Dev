@@ -60,3 +60,4 @@ buck-out/
 
 # iOS
 /ios
+package-lock.json
