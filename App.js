@@ -1,7 +1,7 @@
 import React, {useState, useMemo} from 'react';
 import Firebase from "./Firebase"
 import GoogleAuth from "./Auth";
-import {Button, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {Button, SafeAreaView, StyleSheet, Text, View, BackHandler} from 'react-native';
 
 import CustomModal from './CustomModal';
 
@@ -38,6 +38,15 @@ const App = () => {
   let username = useMemo(() => greetingName(userInfo), [userInfo]);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+
+  // BackHandler.addEventListener('hardwareBackPress', () => {
+  
+  //   if (!isModalVisible) {
+  //     setIsModalVisible(false)
+  //     return true;
+  //   }
+  //   return false;
+  // });
   
   return (
     <SafeAreaView style={styles.container}>
@@ -58,7 +67,7 @@ const App = () => {
       <View style={styles.buttonWrapper}>
         <Button title={"Display Custom component"} onPress={() => setIsModalVisible(true)} />
       </View>
-      <CustomModal isVisible={isModalVisible} onDismiss={() => setIsModalVisible(false)} />
+      <CustomModal onRequestClose={() => setIsModalVisible(false)} isVisible={isModalVisible} onDismiss={() => setIsModalVisible(false)} />
       </View>
     </SafeAreaView>
   );

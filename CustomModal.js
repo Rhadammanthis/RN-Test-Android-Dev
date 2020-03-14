@@ -42,7 +42,7 @@ const RNModal = props => {
     },
   ];
 
-  return <Modal visible={props.isVisible}>
+  return <Modal {...props} visible={props.isVisible} animationType="slide">
         <View style={styles.modal}>
             <Button title={"Dismiss RN component"} onPress={props.onDismiss} />
                 <Text style={{}}>RN test: </Text>
