@@ -1,6 +1,5 @@
-import React, {useState, useMemo} from 'react';
-import Firebase from "./Firebase"
-import GoogleAuth from "./Auth";
+import React, { useState, useMemo } from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
   Button,
   StyleSheet,
@@ -8,7 +7,11 @@ import {
   View,
   Modal,
   FlatList,
+  SafeAreaView,
 } from 'react-native';
+import ListScreen from "./ListScreen"
+import ScrollScreen from "./ScrollScreen"
+import GraphScreen from "./GraphScreen"
 
 /**
  * INSTRUCTIONS:
@@ -42,25 +45,20 @@ const RNModal = props => {
     },
   ];
 
+  const Tab = createBottomTabNavigator();
+
   return <Modal {...props} visible={props.isVisible} animationType="slide">
-        <View style={styles.modal}>
-            <Button title={"Dismiss RN component"} onPress={props.onDismiss} />
-                <Text style={{}}>RN test: </Text>
-                <Text style={{}}>Implement one of the following options in this very same component:</Text>
-                <FlatList
-                    data={data}
-                    renderItem={({item}) => (
-                        <View style={{width: '100%', margin: 10, }}>
-                            <Text style={{ fontWeight: 'bold' }}>{`${item.title}`}</Text>
-                            <Text>{item.body}</Text>
-                        </View>)
-                    }
-                    keyExtractor={item => item.id}
-                />
-        </View>
-    </Modal>
+    <SafeAreaView style={styles.modal}>
+      <Button title={"Dismiss RN component"} onPress={props.onDismiss} />
+      <Tab.Navigator>
+        <Tab.Screen name="List" component={ListScreen} />
+        <Tab.Screen name="Scroll" component={ScrollScreen} />
+        <Tab.Screen name="Graph" component={GraphScreen} />
+      </Tab.Navigator>
+    </SafeAreaView>
+  </Modal>
 }
-  
+
 
 const styles = StyleSheet.create({
   modal: {

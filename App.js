@@ -1,7 +1,8 @@
-import React, {useState, useMemo} from 'react';
+import React, { useState, useMemo } from 'react';
 import Firebase from "./Firebase"
 import GoogleAuth from "./Auth";
-import {Button, SafeAreaView, StyleSheet, Text, View, BackHandler} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { Button, SafeAreaView, StyleSheet, Text, View, BackHandler } from 'react-native';
 
 import CustomModal from './CustomModal';
 
@@ -39,37 +40,30 @@ const App = () => {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  // BackHandler.addEventListener('hardwareBackPress', () => {
-  
-  //   if (!isModalVisible) {
-  //     setIsModalVisible(false)
-  //     return true;
-  //   }
-  //   return false;
-  // });
-  
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={{ flex: 1 }}>
-      <Text style={styles.sectionHeaderText}>Android test:</Text>
-      <Text style={styles.welcomeText}>{`Heey, ${username}!`}</Text>
-      <View style={styles.buttonWrapper}>
-        {userInfo
-            ? <Button title={"Sign me out"} onPress={() => doSignOut(setUserInfo)}/>
-            : <Button title={"Sign me in"} onPress={() => doSignIn(setUserInfo)}/>}
-      </View>
-      <View style={styles.buttonWrapper}>
-        <Button title={"Test Crash"} onPress={() => Firebase.testCrash()}/>
-      </View>
-      </View>
-      <View style={{flex: 1}}>
-      <Text style={styles.sectionHeaderText}>RN test:</Text>
-      <View style={styles.buttonWrapper}>
-        <Button title={"Display Custom component"} onPress={() => setIsModalVisible(true)} />
-      </View>
-      <CustomModal onRequestClose={() => setIsModalVisible(false)} isVisible={isModalVisible} onDismiss={() => setIsModalVisible(false)} />
-      </View>
-    </SafeAreaView>
+    <NavigationContainer>
+      <SafeAreaView style={styles.container}>
+        <View style={{ flex: 1 }}>
+          <Text style={styles.sectionHeaderText}>Android test:</Text>
+          <Text style={styles.welcomeText}>{`Heey, ${username}!`}</Text>
+          <View style={styles.buttonWrapper}>
+            {userInfo
+              ? <Button title={"Sign me out"} onPress={() => doSignOut(setUserInfo)} />
+              : <Button title={"Sign me in"} onPress={() => doSignIn(setUserInfo)} />}
+          </View>
+          <View style={styles.buttonWrapper}>
+            <Button title={"Test Crash"} onPress={() => Firebase.testCrash()} />
+          </View>
+        </View>
+        <View style={{ flex: 1 }}>
+          <Text style={styles.sectionHeaderText}>RN test:</Text>
+          <View style={styles.buttonWrapper}>
+            <Button title={"Display Custom component"} onPress={() => setIsModalVisible(true)} />
+          </View>
+          <CustomModal onRequestClose={() => setIsModalVisible(false)} isVisible={isModalVisible} onDismiss={() => setIsModalVisible(false)} />
+        </View>
+      </SafeAreaView>
+    </NavigationContainer>
   );
 };
 
