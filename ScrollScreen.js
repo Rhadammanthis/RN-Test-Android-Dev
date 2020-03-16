@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   StyleSheet,
@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 const ScrollScreen = props => {
 
-  const [panelAnim] = useState(new Animated.Value(0))
   const [dataArray, setDataArray] = useState([])
   const scrollRef = React.createRef();
 
