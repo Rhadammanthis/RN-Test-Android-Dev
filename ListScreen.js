@@ -1,59 +1,28 @@
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import SortableListView from 'react-native-sortable-listview'
 import {
-  Button,
   StyleSheet,
   Text,
   View,
-  Modal,
-  FlatList,
-  SafeAreaView,
-  TouchableHighlight
 } from 'react-native';
+
+import ListItem, { getCharacter} from "./ListItem"
 
 const ListScreen = props => {
 
   let data = {
-    hello: { text: 'world' },
-    how: { text: 'are you' },
-    test: { text: 123 },
-    this: { text: 'is' },
-    a: { text: 'a' },
-    real: { text: 'real' },
-    drag: { text: 'drag and drop' },
-    bb: { text: 'bb' },
-    cc: { text: 'cc' },
-    dd: { text: 'dd' },
-    ee: { text: 'ee' },
-    ff: { text: 'ff' },
-    gg: { text: 'gg' },
-    hh: { text: 'hh' },
-    ii: { text: 'ii' },
-    jj: { text: 'jj' },
-    kk: { text: 'kk' },
+    ana: getCharacter("Ana"),
+    ashe: getCharacter("Ashe"),
+    brig: getCharacter("Brigitte"),
+    doom: getCharacter("Doomfist"),
+    cree: getCharacter("McCree"),
+    sig: getCharacter("Sigma")
   }
 
   let order = Object.keys(data) //Array of keys
 
-  renderItem = (row) => {
-    return (
-      <TouchableHighlight
-        underlayColor={'#eee'}
-        style={{
-          margin: 5,
-          padding: 25,
-          borderRadius: 10,
-          backgroundColor: '#F8F8F8',
-          borderBottomWidth: 1,
-          borderColor: '#eee',
-        }}
-      >
-        <Text>{row.text}</Text>
-      </TouchableHighlight>
-    );
-  };
-
-  return <View style={{ flex: 1, backgroundColor: 'gray' }}>
+  return <View style={{ flex: 1 }}>
+    <Text style={styles.title}> Who is the best Overwatch hero?</Text>
     <SortableListView
       style={{ flex: 1 }}
       data={data}
@@ -61,9 +30,17 @@ const ListScreen = props => {
       onRowMoved={e => {
         order.splice(e.to, 0, order.splice(e.from, 1)[0])
       }}
-      renderRow={row => this.renderItem(row)}
+      renderRow={row => <ListItem key={row.name} character={row} animatable={false}/>}
     />
   </View>
 }
+
+const styles = StyleSheet.create({
+  title: {
+    textAlign: 'center', 
+    paddingHorizontal: 20, 
+    fontSize: 20
+  }
+});
 
 export default ListScreen;
