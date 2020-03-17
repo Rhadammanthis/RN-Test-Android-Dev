@@ -1,4 +1,9 @@
 
+## Dev Notes
+
+I noticed that the Google Auth service started acting up in the last few days, did you guys made some changes to the Firebase project?
+Other than that, please let me know if there's anything I can explain to you all about my process or decision making.
+
 ## Android Test Instructions
 
 This is a RN project only available for Android. It uses Google Sign-In API and Firebase Crashlytics.
