@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import Firebase from "./Firebase"
 import GoogleAuth from "./Auth";
 import { NavigationContainer } from '@react-navigation/native';
-import { Button, SafeAreaView, StyleSheet, Text, View, BackHandler } from 'react-native';
+import { Button, SafeAreaView, StyleSheet, Text, View, Alert } from 'react-native';
 
 import CustomModal from './CustomModal';
 
@@ -16,8 +16,8 @@ import CustomModal from './CustomModal';
 
 const doSignIn = (setUserInfo) => {
   GoogleAuth.signIn()
-    .then(userInfo => setUserInfo(userInfo))
-    .catch(_ => setUserInfo(null));
+    .then(userInfo => { console.log(userInfo); setUserInfo(userInfo)})
+    .catch(_ => { console.log("Error",_); Alert.alert(`Error ${_.code}`, `Sign in could not be completed due to an unexpected error`); setUserInfo(null)});
 };
 
 const doSignOut = (setUserInfo) => {
