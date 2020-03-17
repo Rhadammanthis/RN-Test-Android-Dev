@@ -145,6 +145,12 @@ android {
             include "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
         }
     }
+    ext{
+        APP_NAME = "RNTestAndroidDev"
+    }
+    defaultConfig {
+        manifestPlaceholders = [applicationLabel: "@string/app_name"]
+    }
     signingConfigs {
         debug {
             storeFile file('debug.keystore')
@@ -154,15 +160,24 @@ android {
         }
         // TODO: Create keystore configuration for Alpha product flavor
         alpha{
-
+            storeFile file('alpha.keystore')
+            storePassword 'rnAlpha'
+            keyAlias 'alias_alpha'
+            keyPassword 'rnAlpha'
         }
         // TODO: Create keystore configuration for Beta product flavor
         beta {
-
+            storeFile file('beta.keystore')
+            storePassword 'rnBeta'
+            keyAlias 'alias_beta'
+            keyPassword 'rnBeta-beta'
         }
         // TODO: Create keystore configuration for Production product flavor
         prod {
-
+            storeFile file('prod.keystore')
+            storePassword 'rnProd'
+            keyAlias 'alias_prod'
+            keyPassword 'rnProd'
         }
     }
     buildTypes {
@@ -179,32 +194,53 @@ android {
         // TODO: Setup Alpha product flavor for a debug. The `signingConfig.debug` configuration must be applied!
         // The expected outcome is once you run the project, an app with a name `RNTestAndroidDev-alphaDebug` installed in your emulator / device
         debugAlpha{
-
+            debuggable = true
+            matchingFallbacks = ['debug']
+            signingConfig signingConfigs.debug
+            manifestPlaceholders = [ applicationLabel: APP_NAME + "-alphaDebug"]
         }
         // TODO: Setup Beta product flavor for a debug. The `signingConfig.debug` configuration must be applied!
         // The expected outcome is once you run the project, an app with a name `RNTestAndroidDev-betaDebug` installed in your emulator / device
         debugBeta{
-
+            debuggable = true
+            matchingFallbacks = ['debug']
+            signingConfig signingConfigs.debug
+            manifestPlaceholders = [ applicationLabel: APP_NAME + "-betaDebug"]
         }
         // TODO: Setup Production product flavor for a debug. The `signingConfig.debug` configuration must be applied!
         // The expected outcome is once you run the project, an app with a name `RNTestAndroidDev-debug` installed in your emulator / device
         debugProd{
-
+            debuggable = true
+            matchingFallbacks = ['debug']
+            signingConfig signingConfigs.debug
+            manifestPlaceholders = [ applicationLabel: APP_NAME + "-debug"]
         }
         // TODO: Setup Alpha product flavor for a release candidate. The `signingConfig.alpha` configuration must be applied!
         // The expected outcome is once you run the project, an app with a name `RNTestAndroidDev-alpha` installed in your emulator / device
         releaseAlpha{
-
+            manifestPlaceholders = [ applicationLabel: APP_NAME + "-alpha"]
+            matchingFallbacks = ['release']
+            signingConfig signingConfigs.alpha
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
         // TODO: Setup Beta product flavor for a release candidate. The `signingConfig.beta` configuration must be applied!
         // The expected outcome is once you run the project, an app with a name `RNTestAndroidDev-beta` installed in your emulator / device
         releaseBeta{
-
+            manifestPlaceholders = [ applicationLabel: APP_NAME + "-beta"]
+            matchingFallbacks = ['release']
+            signingConfig signingConfigs.beta
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
         // TODO: Setup Production product flavor for a release candidate. The `signingConfig.prod` configuration must be applied!
         // The expected outcome is once you run the project, an app with a name `RNTestAndroidDev` installed in your emulator / device
         releaseProd{
-
+            manifestPlaceholders = [ applicationLabel: APP_NAME]
+            matchingFallbacks = ['release']
+            signingConfig signingConfigs.prod
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
     // applicationVariants are e.g. debug, release
